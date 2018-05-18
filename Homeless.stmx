@@ -60,7 +60,7 @@ Risk_of_Losing_Assistance</eqn>
 				<units>People/Year</units>
 			</flow>
 			<flow name="New Entries\nto Assistance\nPrograms">
-				<eqn>MIN(Onset_of_Housing_Needs, Available_Capacity/Average_Time_to_Access_Services)</eqn>
+				<eqn>Prioritize_New_Entries*MIN(Onset_of_Housing_Needs, Available_Capacity/Average_Time_to_Access_Services)</eqn>
 				<non_negative/>
 				<units>People/Year</units>
 			</flow>
@@ -72,7 +72,7 @@ Average_Time_on_Assistance</eqn>
 			</flow>
 			<flow name="Entry to Assistance\nfrom Unstable Housing">
 				<eqn>MIN(Unstable_Housing_or_Homelessness/Average_Time_to_Access_Services, 
-Available_Capacity/Average_Time_to_Access_Services)</eqn>
+Available_Capacity/Average_Time_to_Access_Services)/Prioritize_New_Entries</eqn>
 				<non_negative/>
 				<units>People/Year</units>
 			</flow>
@@ -222,6 +222,24 @@ Universal_Prevention</eqn>
 				<range min="0" max="0.5"/>
 				<units>Dimensionless</units>
 			</aux>
+			<aux name="Prioritize\nNew Entries">
+				<eqn>INIT_Prioritize_New_Entries*
+(1+STEP(ES_Prioritize_New_Entries, Ts_Prioritize_New_Entries))</eqn>
+				<units>Years</units>
+			</aux>
+			<aux name="INIT Prioritize\nNew Entries">
+				<eqn>1</eqn>
+				<units>Years</units>
+			</aux>
+			<aux name="ES Prioritize\nNew Entries">
+				<eqn>0</eqn>
+				<range min="-0.5" max="0.5"/>
+				<units>Dimensionless</units>
+			</aux>
+			<aux name="Ts Prioritize\nNew Entries">
+				<eqn>2018</eqn>
+				<units>Years</units>
+			</aux>
 			<isee:dependencies>
 				<var name="Persons_on_Assistance_Programs">
 					<in>INIT_Persons_in_Assistance_Programs</in>
@@ -237,6 +255,7 @@ Universal_Prevention</eqn>
 					<in>Onset_of_Housing_Needs</in>
 					<in>Available_Capacity</in>
 					<in>Average_Time_to_Access_Services</in>
+					<in>Prioritize_New_Entries</in>
 				</var>
 				<var name="Leaving_for_Stable_Placements">
 					<in>Persons_on_Assistance_Programs</in>
@@ -246,6 +265,7 @@ Universal_Prevention</eqn>
 					<in>Unstable_Housing_or_Homelessness</in>
 					<in>Available_Capacity</in>
 					<in>Average_Time_to_Access_Services</in>
+					<in>Prioritize_New_Entries</in>
 				</var>
 				<var name="Risk_of_Losing_Assistance">
 					<in>ES_Risk_of_Losing_Assistance</in>
@@ -300,6 +320,11 @@ Universal_Prevention</eqn>
 				<var name="Effect_of_Inflation_on_Program_Capacity">
 					<in>Inflation_Rate</in>
 				</var>
+				<var name="Prioritize_New_Entries">
+					<in>ES_Prioritize_New_Entries</in>
+					<in>INIT_Prioritize_New_Entries</in>
+					<in>Ts_Prioritize_New_Entries</in>
+				</var>
 			</isee:dependencies>
 		</variables>
 		<views>
@@ -342,7 +367,7 @@ Universal_Prevention</eqn>
 				<isee:spatial_map color="black" background="white" font_size="12pt"/>
 				<isee:animation_object color="black" background="white" font_size="12pt"/>
 			</style>
-			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="4" isee:page_rows="2" isee:scroll_x="1561.25" isee:scroll_y="136.25" zoom="160" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="4" isee:page_rows="2" isee:scroll_x="121.429" zoom="140" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="8pt" label_side="top">
 						<shape type="rectangle" width="55" height="45"/>
@@ -446,7 +471,7 @@ Universal_Prevention</eqn>
 					<graph legend_position="right" axis_title_font_size="9pt" x="366.518" y="3.45187" width="389.286" height="257.31" comparative="true" type="time_series" show_grid="false" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="3" num_y_labels="3" title="Persons on Assistance" isee:fill_intensity="0.1" from="2015" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
 						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Persons_on_Assistance_Programs"/>
-							<scale min="0" max="2000000"/>
+							<scale min="0" max="3000000"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -648,19 +673,19 @@ Universal_Prevention</eqn>
 					</from>
 					<to>New_Entries_to_Assistance_Programs</to>
 				</connector>
-				<alias font_style="italic" label_side="right" uid="48" x="1247.22" y="316" width="18" height="18">
+				<alias font_style="italic" label_side="right" uid="48" x="1282.22" y="247.429" width="18" height="18">
 					<of>Available_Capacity</of>
 				</alias>
-				<connector uid="49" polarity="+" isee:polarity_placement="inside" angle="147.831">
+				<connector uid="49" polarity="+" isee:polarity_placement="inside" angle="203.646">
 					<from>
 						<alias uid="48"/>
 					</from>
 					<to>Entry_to_Assistance_from_Unstable_Housing</to>
 				</connector>
-				<alias font_style="italic" label_side="right" uid="50" x="1247.22" y="241.556" width="18" height="18">
+				<alias font_style="italic" label_side="right" uid="50" x="1229.69" y="316" width="18" height="18">
 					<of>Average_Time_to_Access_Services</of>
 				</alias>
-				<connector uid="51" polarity="-" isee:polarity_placement="inside" angle="220.78">
+				<connector uid="51" polarity="-" isee:polarity_placement="inside" angle="135.891">
 					<from>
 						<alias uid="50"/>
 					</from>
@@ -712,6 +737,46 @@ Universal_Prevention</eqn>
 					<from>Ts_Program_Capacity</from>
 					<to>Program_Capacity</to>
 				</connector>
+				<alias font_style="italic" uid="63" x="579.595" y="497.025" width="18" height="18">
+					<of>ES_Program_Capacity</of>
+				</alias>
+				<aux label_side="top" x="2078.26" y="243.842" width="18" height="18" name="Prioritize\nNew Entries"/>
+				<aux label_side="left" x="2050.7" y="290.699" name="INIT Prioritize\nNew Entries"/>
+				<aux label_side="left" x="2012.4" y="242.842" width="18" height="18" name="ES Prioritize\nNew Entries"/>
+				<connector uid="64" angle="359.13">
+					<from>ES_Prioritize_New_Entries</from>
+					<to>Prioritize_New_Entries</to>
+				</connector>
+				<connector uid="65" angle="45.9985">
+					<from>INIT_Prioritize_New_Entries</from>
+					<to>Prioritize_New_Entries</to>
+				</connector>
+				<aux label_side="right" x="2141.12" y="243.842" width="18" height="18" name="Ts Prioritize\nNew Entries"/>
+				<connector uid="66" angle="180">
+					<from>Ts_Prioritize_New_Entries</from>
+					<to>Prioritize_New_Entries</to>
+				</connector>
+				<alias font_style="italic" uid="67" x="1084.57" y="200.167" width="18" height="18">
+					<of>Prioritize_New_Entries</of>
+				</alias>
+				<connector uid="68" polarity="+" isee:polarity_placement="inside" angle="148.262">
+					<from>
+						<alias uid="67"/>
+					</from>
+					<to>New_Entries_to_Assistance_Programs</to>
+				</connector>
+				<alias font_style="italic" label_side="right" label_angle="45" uid="69" x="1218" y="232.452" width="18" height="18">
+					<of>Prioritize_New_Entries</of>
+				</alias>
+				<connector uid="70" angle="248.357">
+					<from>
+						<alias uid="69"/>
+					</from>
+					<to>Entry_to_Assistance_from_Unstable_Housing</to>
+				</connector>
+				<alias font_style="italic" uid="71" x="654.571" y="433.635" width="18" height="18">
+					<of>ES_Prioritize_New_Entries</of>
+				</alias>
 			</view>
 			<view isee:show_pages="false" background="white" page_width="1066" page_height="600" isee:scroll_x="158" home_view="true" type="interface">
 				<style/>
