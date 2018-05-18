@@ -9,7 +9,7 @@
 	</header>
 	<sim_specs isee:simulation_delay="0" method="Euler" time_units="Years" isee:instantaneous_flows="false">
 		<start>2007</start>
-		<stop>2035</stop>
+		<stop>2055</stop>
 		<dt reciprocal="true">64</dt>
 	</sim_specs>
 	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" saved_runs="7" keep="false" rifp="true"/>
@@ -367,7 +367,7 @@ Universal_Prevention</eqn>
 				<isee:spatial_map color="black" background="white" font_size="12pt"/>
 				<isee:animation_object color="black" background="white" font_size="12pt"/>
 			</style>
-			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="4" isee:page_rows="2" isee:scroll_x="270" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="4" isee:page_rows="2" isee:scroll_x="320.833" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="8pt" label_side="top">
 						<shape type="rectangle" width="55" height="45"/>
