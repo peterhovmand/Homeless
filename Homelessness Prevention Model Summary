@@ -1,0 +1,12 @@
+Homeless model v4.0 5/20/18
+1.6 million people served by homeless assistance programs (es, th, psh) in 2007
+Trend has declined annually as funding and capacity has increased (unclear if erosion in quality identified in gaps analysis outpace capacity building)
+10 million people in insecure housing, based on ACS estimate that 10 million households (probably 20 million people) were severely rent burnded (>50% rent), and 25-50% needed homeless assistance
+Proportion of insecured seeking assistnace (reverse coded) is 60% 
+Assumed people cycle through instability quickly with avg time of 2 years. so, about 5.25 million enter/reenter each year, and most are seeking some type of homeless assistance (3.35m). 
+Risk of discontinuing seekign services is 50/50
+People in homeless assistance stay for an average of 3.5 years based on AHAR Part 2 that suggests 50% psh stay 3 or more years (and # of psh skews avg times)
+Risk of leaving assistance is set at 7% based on 2015 and 2016 system performance outcomes of success or retention
+Fractional rate of entry from insecured to homeless is .4 but this declines given capacacity constraints
+assume capacity is eroding slightly over time at .011, and with more capacity, more homeless assistance will be provided
+
