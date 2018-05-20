@@ -100,7 +100,7 @@ Prioritize_New_Entries</eqn>
 				<units>Years</units>
 			</aux>
 			<aux name="INIT Average Time\non Assistance">
-				<eqn>6.43957239304649</eqn>
+				<eqn>3.5</eqn>
 				<units>Years</units>
 			</aux>
 			<aux name="ES Average\nTime on\nAssistance">
@@ -154,8 +154,8 @@ Prioritize_New_Entries</eqn>
 (1-STEP(&quot;ES_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance&quot;, &quot;Ts_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance&quot;))</eqn>
 				<units>Years</units>
 			</aux>
-			<aux name="INIT Average Time\nUnstable Housing or Homeless\nw/o Assistance">
-				<eqn>21.7553070930161</eqn>
+			<aux name="INIT Average Time\nUnstable Housing or\nHomeless w/o Assistance">
+				<eqn>2</eqn>
 				<units>Years</units>
 			</aux>
 			<aux name="ES Average Time\nUnstable Housing or Homeless\nw/o Assistance">
@@ -175,7 +175,7 @@ Prioritize_New_Entries</eqn>
 			<aux name="Program\nCapacity">
 				<doc>Total capacity of assistance programs. The model assumes that the capacity at the start of the simulation equals the inital number of people in assistance programs. </doc>
 				<eqn>INIT_Persons_in_Assistance_Programs*
-EXP(-Fractional_Rate_of_Change_in_Capacity*(TIME-STARTTIME))*
+EXP(Fractional_Rate_of_Change_in_Capacity*(TIME-STARTTIME))*
 (1+STEP(ES_Program_Capacity, Ts_Program_Capacity))</eqn>
 				<units>People</units>
 			</aux>
@@ -190,11 +190,12 @@ EXP(-Fractional_Rate_of_Change_in_Capacity*(TIME-STARTTIME))*
 			</aux>
 			<aux name="Onset of\nHousing\nNeeds">
 				<eqn>INIT_Onset_of_Housing_Needs*
-Universal_Prevention</eqn>
+Universal_Prevention*
+EXP(Effect_of_Economy*(TIME-STARTTIME))</eqn>
 				<units>People/Year</units>
 			</aux>
 			<aux name="INIT Onset of\nHousing\nNeeds">
-				<eqn>380370</eqn>
+				<eqn>2.07e6</eqn>
 				<units>People/Year</units>
 			</aux>
 			<aux name="Fractional Rate of\nEntry of Services\nfrom Unstable or Homeless">
@@ -217,7 +218,7 @@ INIT_Fractional_Rate_of_Entry_of_Services_from_Unstable_or_Homeless*
 				<units>Years</units>
 			</aux>
 			<aux name="Fractional\nRate of Change\nin Capacity">
-				<eqn>0.0118</eqn>
+				<eqn>-0.0118</eqn>
 				<units>Dimensionless/Year</units>
 			</aux>
 			<aux name="Ts Program Capacity">
@@ -252,11 +253,14 @@ INIT_Fractional_Rate_of_Entry_of_Services_from_Unstable_or_Homeless*
 				<units>People/Year</units>
 			</aux>
 			<aux name="Onset of\nHousing\nInsecurity">
-				<eqn>INIT_Onset_of_Housing_Insecurity*Universal_Prevention*Targetted_Prevention</eqn>
+				<eqn>INIT_Onset_of_Housing_Insecurity*
+Universal_Prevention*
+Targetted_Prevention*
+EXP(Effect_of_Economy*(TIME-STARTTIME))</eqn>
 				<units>People/Year</units>
 			</aux>
 			<aux name="INIT Onset of\nHousing\nInsecurity">
-				<eqn>380370</eqn>
+				<eqn>221000</eqn>
 				<units>People/Year</units>
 			</aux>
 			<aux name="Targetted\nPrevention">
@@ -281,8 +285,8 @@ INIT_Fractional_Rate_of_Entry_of_Services_from_Unstable_or_Homeless*
 				<units>People</units>
 			</stock>
 			<aux name="INIT Prop\nSeeking\nAssistance">
-				<eqn>2*1.8e6</eqn>
-				<units>People</units>
+				<eqn>.407</eqn>
+				<units>Dimensionless</units>
 			</aux>
 			<flow name="Onset of Unstable\nHousing or Homelessness\nNot Seeking Assistance">
 				<eqn>Onset_of_Housing_Insecurity</eqn>
@@ -306,7 +310,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 (1-STEP(ES_Risk_of_Discontinuing_to_Seek_Services, Ts_Risk_of_Discontinuing_to_Seek_Services))</eqn>
 				<units>Dimensionless/Year</units>
 			</aux>
-			<aux name="INIT Risk of Discontinuing\nto Seek Services">
+			<aux name="INIT Risk of\nDiscontinuing\nto Seek Services">
 				<eqn>.5</eqn>
 				<units>Dimensionless/Year</units>
 			</aux>
@@ -319,13 +323,14 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 				<eqn>2018</eqn>
 				<units>Years</units>
 			</aux>
-			<aux name="Persons on Assistance Ref Mode">
-				<eqn>TIME</eqn>
-				<gf>
-					<xscale min="2007" max="2055"/>
-					<yscale min="0" max="100"/>
-					<ypts>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</ypts>
-				</gf>
+			<aux name="Total Unstable Housing\nor Homeless">
+				<eqn>Unstable_Housing_or_Homelessness_Seeking_Assistance + Unstable_Housing_or_Homelessness_not_Seeking_Assistance</eqn>
+				<isee:summing/>
+				<units>People</units>
+			</aux>
+			<aux name="Effect of\nEconomy">
+				<eqn>0</eqn>
+				<units>Dimensionless/Year</units>
 			</aux>
 			<isee:dependencies>
 				<var name="Persons_on_Assistance_Programs">
@@ -397,6 +402,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 				<var name="Onset_of_Housing_Needs">
 					<in>INIT_Onset_of_Housing_Needs</in>
 					<in>Universal_Prevention</in>
+					<in>Effect_of_Economy</in>
 				</var>
 				<var name="Fractional_Rate_of_Entry_of_Services_from_Unstable_or_Homeless">
 					<in>ES_Fractional_Rate_of_Entry_of_Services_from_Unstable_or_Homeless</in>
@@ -417,6 +423,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<in>Universal_Prevention</in>
 					<in>INIT_Onset_of_Housing_Insecurity</in>
 					<in>Targetted_Prevention</in>
+					<in>Effect_of_Economy</in>
 				</var>
 				<var name="Targetted_Prevention">
 					<in>ES_Targetted_Prevention</in>
@@ -441,6 +448,10 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<in>ES_Risk_of_Discontinuing_to_Seek_Services</in>
 					<in>INIT_Risk_of_Discontinuing_to_Seek_Services</in>
 					<in>Ts_Risk_of_Discontinuing_to_Seek_Services</in>
+				</var>
+				<var name="Total_Unstable_Housing_or_Homeless">
+					<in>Unstable_Housing_or_Homelessness_Seeking_Assistance</in>
+					<in>Unstable_Housing_or_Homelessness_not_Seeking_Assistance</in>
 				</var>
 			</isee:dependencies>
 		</variables>
@@ -484,7 +495,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 				<isee:spatial_map color="black" background="white" font_size="12pt"/>
 				<isee:animation_object color="black" background="white" font_size="12pt"/>
 			</style>
-			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="60.625" isee:scroll_y="508.125" zoom="160" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" page_width="768" page_height="588" isee:page_cols="3" isee:page_rows="2" zoom="140" isee:popup_graphs_are_comparative="true" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="8pt" label_side="top">
 						<shape type="rectangle" width="55" height="45"/>
@@ -572,11 +583,11 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<graph x="57.143" y="15.9519" width="389.286" height="247.699" type="time_series" isee:time_format_id="Builtin" show_grid="false" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="4" num_y_labels="3" title="Need for Housing Assistance" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
 						<plot color="blue" pen_width="2" index="0" show_y_axis="true">
 							<entity name="Persons_on_Assistance_Programs"/>
-							<scale min="0" max="2000000"/>
+							<scale min="0"/>
 						</plot>
 						<plot color="red" pen_width="2" index="1" show_y_axis="true">
-							<entity name="Unstable_Housing_or_Homelessness_Seeking_Assistance"/>
-							<scale min="0" max="5000000"/>
+							<entity name="Total_Unstable_Housing_or_Homeless"/>
+							<scale min="0"/>
 						</plot>
 					</graph>
 					<graph legend_position="right" axis_title_font_size="9pt" x="57.143" y="15.9519" width="389.286" height="247.699" comparative="true" type="time_series" show_grid="false" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="3" num_y_labels="3" title="Graph" isee:fill_intensity="0.1" from="2015" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
@@ -662,7 +673,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<to>Leaving_for_Stable_Placements_without_Services_and_Seeking_assistance</to>
 				</connector>
 				<aux label_side="top" x="1740.84" y="219.857" name="Average Time\nUnstable Housing or Homeless\nw/o Assistance"/>
-				<aux label_side="left" x="1704.28" y="257.714" name="INIT Average Time\nUnstable Housing or Homeless\nw/o Assistance"/>
+				<aux label_side="left" x="1704.28" y="257.714" name="INIT Average Time\nUnstable Housing or\nHomeless w/o Assistance"/>
 				<aux label_side="left" x="1674.98" y="218.857" name="ES Average Time\nUnstable Housing or Homeless\nw/o Assistance"/>
 				<connector uid="20" angle="359.13">
 					<from>&quot;ES_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance&quot;</from>
@@ -700,17 +711,17 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<from>Persons_on_Assistance_Programs</from>
 					<to>Effect_of_Available_Capacity_on_Entries</to>
 				</connector>
-				<aux label_side="top" x="945.373" y="95.944" name="Onset of\nHousing\nNeeds"/>
+				<aux label_side="right" label_angle="45" x="927.373" y="90.944" name="Onset of\nHousing\nNeeds"/>
 				<connector uid="29" polarity="+" isee:polarity_placement="inside" angle="358.86">
 					<from>Onset_of_Housing_Needs</from>
 					<to>New_Entries_to_Assistance_Programs</to>
 				</connector>
-				<aux label_side="left" x="891.484" y="95.944" name="INIT Onset of\nHousing\nNeeds"/>
+				<aux label_side="left" x="855.77" y="90.944" name="INIT Onset of\nHousing\nNeeds"/>
 				<connector uid="30" polarity="+" isee:polarity_placement="outside" angle="0">
 					<from>INIT_Onset_of_Housing_Needs</from>
 					<to>Onset_of_Housing_Needs</to>
 				</connector>
-				<connector uid="31" polarity="-" isee:polarity_placement="inside" angle="317.864">
+				<connector uid="31" polarity="-" isee:polarity_placement="outside" angle="4.38073">
 					<from>
 						<alias uid="32"/>
 					</from>
@@ -811,7 +822,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<shape type="circle" radius="18"/>
 					<of>INIT_Persons_in_Unstable_Housing_and_Homeless</of>
 				</alias>
-				<alias font_style="italic" label_side="left" uid="32" x="882.484" y="38.1904" width="18" height="18">
+				<alias font_style="italic" label_side="left" uid="32" x="846.77" y="50.3333" width="18" height="18">
 					<of>Universal_Prevention</of>
 				</alias>
 				<alias font_style="italic" label_side="right" uid="24" x="1336.27" y="423.917" width="18" height="18">
@@ -845,7 +856,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 				<alias font_style="italic" uid="61" x="508.411" y="28" width="18" height="18">
 					<of>INIT_Onset_of_Housing_Needs</of>
 				</alias>
-				<alias color="blue" background="white" font_style="italic" uid="62" x="690.786" y="28" width="18" height="18">
+				<alias color="blue" background="white" font_style="italic" uid="62" x="508.411" y="348.143" width="18" height="18">
 					<shape type="circle" radius="18"/>
 					<of>Fractional_Rate_of_Change_in_Capacity</of>
 				</alias>
@@ -866,18 +877,18 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<from>Unmet_Need_for_Assistance</from>
 					<to>Onset_of_Unstable_Housing_and_Homelessness_Seeking_Assistance</to>
 				</connector>
-				<alias font_style="italic" label_side="left" uid="66" x="882.484" y="385.357" width="18" height="18">
+				<alias font_style="italic" label_side="left" uid="66" x="850.341" y="387.346" width="18" height="18">
 					<of>Universal_Prevention</of>
 				</alias>
-				<aux label_side="top" x="945.373" y="440.292" name="Onset of\nHousing\nInsecurity"/>
-				<connector uid="67" angle="319.556">
+				<aux label_side="right" label_angle="45" x="944.659" y="468.917" name="Onset of\nHousing\nInsecurity"/>
+				<connector uid="67" polarity="-" isee:polarity_placement="outside" angle="353.616">
 					<from>
 						<alias uid="66"/>
 					</from>
 					<to>Onset_of_Housing_Insecurity</to>
 				</connector>
-				<aux label_side="left" x="891.484" y="440.292" name="INIT Onset of\nHousing\nInsecurity"/>
-				<connector uid="68" angle="0">
+				<aux label_side="left" x="859.341" y="432.917" name="INIT Onset of\nHousing\nInsecurity"/>
+				<connector uid="68" polarity="+" isee:polarity_placement="inside" angle="4.6097">
 					<from>INIT_Onset_of_Housing_Insecurity</from>
 					<to>Onset_of_Housing_Insecurity</to>
 				</connector>
@@ -892,14 +903,14 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<from>Ts_Targetted_Prevention</from>
 					<to>Targetted_Prevention</to>
 				</connector>
-				<alias font_style="italic" label_side="left" uid="71" x="882.484" y="474.196" width="18" height="18">
+				<alias font_style="italic" label_side="left" uid="71" x="850.341" y="459.917" width="18" height="18">
 					<of>Targetted_Prevention</of>
 				</alias>
 				<connector uid="72" angle="140.855">
 					<from>Fractional_Rate_of_Change_in_Capacity</from>
 					<to>Program_Capacity</to>
 				</connector>
-				<connector uid="73" angle="38.5255">
+				<connector uid="73" polarity="-" isee:polarity_placement="outside" angle="0">
 					<from>
 						<alias uid="71"/>
 					</from>
@@ -968,7 +979,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<to>Discontinuing_Seeking_Assistance</to>
 				</connector>
 				<aux label_side="top" x="2084.55" y="321.038" name="Risk of Discontinuing\nto Seek Services"/>
-				<aux label_side="left" x="2038.72" y="349.895" width="18" height="18" name="INIT Risk of Discontinuing\nto Seek Services"/>
+				<aux label_side="left" x="2038.72" y="349.895" width="18" height="18" name="INIT Risk of\nDiscontinuing\nto Seek Services"/>
 				<aux label_side="left" x="2018.69" y="320.482" name="ES Risk of\nDiscontinuing\nto Seek Services"/>
 				<connector uid="84" angle="359.516">
 					<from>ES_Risk_of_Discontinuing_to_Seek_Services</from>
@@ -983,7 +994,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<from>Ts_Risk_of_Discontinuing_to_Seek_Services</from>
 					<to>Risk_of_Discontinuing_to_Seek_Services</to>
 				</connector>
-				<alias font_style="italic" uid="87" x="599.036" y="273.335" width="18" height="18">
+				<alias font_style="italic" uid="87" x="261.507" y="428.21" width="18" height="18">
 					<of>ES_Risk_of_Discontinuing_to_Seek_Services</of>
 				</alias>
 				<alias font_style="italic" label_side="top" uid="88" x="1233.49" y="441.917" width="18" height="18">
@@ -995,7 +1006,29 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					</from>
 					<to>Discontinuing_Seeking_Assistance</to>
 				</connector>
-				<aux x="447.5" y="841.875" name="Persons on Assistance Ref Mode"/>
+				<aux x="2205.77" y="529.916" name="Total Unstable Housing\nor Homeless"/>
+				<alias font_style="italic" uid="90" x="599.036" y="273.335" width="18" height="18">
+					<of>INIT_Risk_of_Discontinuing_to_Seek_Services</of>
+				</alias>
+				<aux x="855.77" y="132.857" name="Effect of\nEconomy"/>
+				<connector uid="91" angle="3.59372">
+					<from>Effect_of_Economy</from>
+					<to>Onset_of_Housing_Needs</to>
+				</connector>
+				<alias color="blue" background="white" font_style="italic" label_side="left" uid="92" x="850.341" y="495.018" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Effect_of_Economy</of>
+				</alias>
+				<connector uid="93" polarity="-" isee:polarity_placement="outside" angle="355.355">
+					<from>
+						<alias uid="92"/>
+					</from>
+					<to>Onset_of_Housing_Insecurity</to>
+				</connector>
+				<alias color="blue" background="white" font_style="italic" uid="94" x="599.036" y="348.143" width="18" height="18">
+					<shape type="circle" radius="18"/>
+					<of>Effect_of_Economy</of>
+				</alias>
 			</view>
 			<view isee:show_pages="false" background="white" page_width="1066" page_height="600" isee:scroll_x="158" home_view="true" type="interface">
 				<style/>
@@ -1008,10 +1041,5 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 			<isee:stories/>
 		</views>
 	</model>
-	<isee:controls>
-		<isee:control priority="interactive" name="INIT_Onset_of_Housing_Needs" value="3051593.69401808"/>
-		<isee:control priority="interactive" name="INIT_Average_Time_on_Assistance" value="0.5"/>
-		<isee:control priority="interactive" name='"INIT_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance"' value="2"/>
-	</isee:controls>
 </xmile>
 
