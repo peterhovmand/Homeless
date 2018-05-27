@@ -1191,7 +1191,7 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<to>ES_weighting</to>
 				</connector>
 			</view>
-			<view isee:show_pages="false" background="white" page_width="1066" page_height="600" isee:scroll_x="4.34783" isee:scroll_y="6.95652" zoom="115" home_view="true" type="interface">
+			<view isee:show_pages="false" background="white" page_width="1066" page_height="600" isee:scroll_x="5" isee:scroll_y="8" home_view="true" type="interface">
 				<style/>
 				<isee:pie_input legend_position="right" uid="113" x="18.2609" y="45.4348" width="501" height="236" isee:label_pie_slices="false" title="Allocation Input">
 					<plot min="0" max="0.5" color="blue">
@@ -1235,7 +1235,6 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 				<button label="" uid="117" x="861" y="367">
 					<actions>
 						<action>new_run</action>
-						<action>start_stella_live</action>
 					</actions>
 				</button>
 				<switch isee:appearance="checkbox" uid="118" x="260.5" y="241.261" width="117" height="64" show_name="true">
@@ -1256,6 +1255,64 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 					<reset_to after="never"/>
 				</slider>
 			</view>
+			<view isee:show_pages="false" background="white" page_width="1066" page_height="600" isee:scroll_x="57" type="interface">
+				<style/>
+				<stacked_container uid="122" x="679" y="43" width="350" height="276">
+					<graph x="679" y="43" width="350" height="276" comparative="true" type="time_series" show_grid="false" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Graph" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Persons_on_Assistance_Programs"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<button label="" uid="123" x="715" y="367">
+					<actions>
+						<action>start_stella_live</action>
+					</actions>
+				</button>
+				<button label="" uid="124" x="788" y="367">
+					<actions>
+						<action>stop_stella_live</action>
+					</actions>
+				</button>
+				<button label="" uid="125" x="861" y="367">
+					<actions>
+						<action>new_run</action>
+					</actions>
+				</button>
+				<switch isee:appearance="checkbox" uid="126" x="199.5" y="291.261" width="117" height="64" show_name="true">
+					<entity name="ES_normalization"/>
+					<reset_to after="never">0</reset_to>
+				</switch>
+				<switch isee:appearance="checkbox" uid="127" x="74.957" y="291.261" width="117" height="64" title="Intervention Active" show_name="true">
+					<entity name="SW"/>
+					<reset_to after="never">0</reset_to>
+				</switch>
+				<button label="" uid="128" x="937.391" y="367">
+					<actions>
+						<action>restore_all</action>
+					</actions>
+				</button>
+				<slider uid="129" x="339.891" y="303.761" width="193" height="39" min="0" max="0.5" title="Normalized ES" isee:navigate_to="false" show_name="true">
+					<entity name="ES"/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+				<slider uid="130" x="160" y="31.3043" max="0.5" isee:navigate_to="false" show_name="true">
+					<entity name="ES_Targetted_Prevention"/>
+					<reset_to after="never"/>
+				</slider>
+				<slider uid="131" x="160" y="83.2391" max="0.5" isee:navigate_to="false" show_name="true">
+					<entity name="ES_Universal_Prevention"/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+				<slider uid="132" x="160" y="135.848" max="0.5" isee:navigate_to="false" show_name="true">
+					<entity name="ES_Average_Time_on_Assistance"/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+				<slider uid="133" x="160" y="211.935" max="0.5" isee:navigate_to="false" show_name="true">
+					<entity name='"ES_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance"'/>
+					<reset_to after="never">0</reset_to>
+				</slider>
+			</view>
 			<isee:templates>
 				<view isee:show_pages="false" background="white" page_width="1066" page_height="600" type="template">
 					<style/>
@@ -1264,5 +1321,13 @@ Unstable_Housing_or_Homelessness_Seeking_Assistance</eqn>
 			<isee:stories/>
 		</views>
 	</model>
+	<isee:controls>
+		<isee:control priority="interactive" name="ES_Average_Time_on_Assistance" value="0.5"/>
+		<isee:control priority="interactive" name="ES_Universal_Prevention" value="0.5"/>
+		<isee:control priority="interactive" name='"ES_Average_Time_Unstable_Housing_or_Homeless_w/o_Assistance"' value="0"/>
+		<isee:control priority="interactive" name="ES_Targetted_Prevention" value="0"/>
+		<isee:control priority="interactive" name="ES_normalization" value="1"/>
+		<isee:control priority="interactive" name="SW" value="1"/>
+	</isee:controls>
 </xmile>
 
