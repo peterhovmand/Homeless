@@ -1,4 +1,4 @@
-# Homeless
+# Homeless Model
 
 This repository has the latest version and documentation for a conceptual system dynamics simulation model of homeless populations in the United States from 2007 to 2027. The model was developed to illustrate homelessness from a complex systems perspective in Fowler et al. (2019). The model and overview can be accessed through an [online interface](https://socialsystemdesignlab.wustl.edu/items/homelessness-and-complex-systems/)
 
